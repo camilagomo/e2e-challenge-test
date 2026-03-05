@@ -2,74 +2,60 @@
   "cadastroUser": {
     "regularUser": {
       "nome": "Usuario Teste UI",
-      "email": "usuario.teste.ui@qa.com.br",
-      "password": "teste@123"
+      "email": "usuario.teste.ui@qa.com.br"
     },
     "adminUser": {
       "nome": "Admin Teste UI",
-      "email": "admin.teste.ui@qa.com.br",
-      "password": "admin@123"
+      "email": "admin.teste.ui@qa.com.br"
     }
   },
   "validUser": {
     "nome": "Usuario Teste",
     "email": "usuario.teste@qa.com.br",
-    "password": "teste@123",
     "administrador": "true"
   },
   "nonAdminUser": {
     "nome": "Usuario Comum",
     "email": "usuario.comum@qa.com.br",
-    "password": "comum@123",
     "administrador": "false"
   },
   "createUserData": {
     "userWithoutName": {
       "nome": "",
       "email": "user@qa.com.br",
-      "password": "teste123",
       "administrador": "true"
     },
     "userWithInvalidEmail": {
       "nome": "Fulano da Silva",
       "email": "email-invalido",
-      "password": "teste123",
       "administrador": "true"
     },
     "userWithoutPassword": {
       "nome": "Fulano da Silva",
       "email": "user@qa.com.br",
-      "password": "",
       "administrador": "true"
     },
     "noFields": {}
   },
   "loginCredentials": {
     "valid": {
-      "email": "fulano@qa.com",
-      "password": "teste"
+      "email": "fulano@qa.com"
     },
     "invalid": {
-      "email": "invalido@qa.com",
-      "password": "senhaerrada"
+      "email": "invalido@qa.com"
     },
     "invalidEmail": {
-      "email": "email-invalido",
-      "password": "teste"
+      "email": "email-invalido"
     },
     "invalidPassword": {
-      "email": "fulano@qa.com",
-      "password": "senhaerrada123"
+      "email": "fulano@qa.com"
     },
-    "missingEmail": {
-      "password": "teste"
-    },
+    "missingEmail": {},
     "missingPassword": {
       "email": "fulano@qa.com"
     },
     "emptyFields": {
-      "email": "",
-      "password": ""
+      "email": ""
     },
     "noFields": {}
   }

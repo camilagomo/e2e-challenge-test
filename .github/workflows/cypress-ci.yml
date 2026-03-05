@@ -28,6 +28,11 @@ jobs:
         with:
           browser: chrome
           headed: false
+        env:
+          CYPRESS_USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          CYPRESS_ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          CYPRESS_LOGIN_VALID_EMAIL: ${{ secrets.LOGIN_VALID_EMAIL }}
+          CYPRESS_LOGIN_VALID_PASSWORD: ${{ secrets.LOGIN_VALID_PASSWORD }}
 
       - name: Upload screenshots on failure
         uses: actions/upload-artifact@v4
