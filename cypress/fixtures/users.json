@@ -1,4 +1,16 @@
 {
+  "cadastroUser": {
+    "regularUser": {
+      "nome": "Usuario Teste UI",
+      "email": "usuario.teste.ui@qa.com.br",
+      "password": "teste@123"
+    },
+    "adminUser": {
+      "nome": "Admin Teste UI",
+      "email": "admin.teste.ui@qa.com.br",
+      "password": "admin@123"
+    }
+  },
   "validUser": {
     "nome": "Usuario Teste",
     "email": "usuario.teste@qa.com.br",
