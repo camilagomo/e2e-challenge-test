@@ -1,0 +1,64 @@
+{
+  "validUser": {
+    "nome": "Usuario Teste",
+    "email": "usuario.teste@qa.com.br",
+    "password": "teste@123",
+    "administrador": "true"
+  },
+  "nonAdminUser": {
+    "nome": "Usuario Comum",
+    "email": "usuario.comum@qa.com.br",
+    "password": "comum@123",
+    "administrador": "false"
+  },
+  "createUserData": {
+    "userWithoutName": {
+      "nome": "",
+      "email": "user@qa.com.br",
+      "password": "teste123",
+      "administrador": "true"
+    },
+    "userWithInvalidEmail": {
+      "nome": "Fulano da Silva",
+      "email": "email-invalido",
+      "password": "teste123",
+      "administrador": "true"
+    },
+    "userWithoutPassword": {
+      "nome": "Fulano da Silva",
+      "email": "user@qa.com.br",
+      "password": "",
+      "administrador": "true"
+    },
+    "noFields": {}
+  },
+  "loginCredentials": {
+    "valid": {
+      "email": "fulano@qa.com",
+      "password": "teste"
+    },
+    "invalid": {
+      "email": "invalido@qa.com",
+      "password": "senhaerrada"
+    },
+    "invalidEmail": {
+      "email": "email-invalido",
+      "password": "teste"
+    },
+    "invalidPassword": {
+      "email": "fulano@qa.com",
+      "password": "senhaerrada123"
+    },
+    "missingEmail": {
+      "password": "teste"
+    },
+    "missingPassword": {
+      "email": "fulano@qa.com"
+    },
+    "emptyFields": {
+      "email": "",
+      "password": ""
+    },
+    "noFields": {}
+  }
+}
