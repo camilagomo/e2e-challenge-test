@@ -18,6 +18,7 @@ This project implements end-to-end (E2E) automated tests for:
 - **GitHub Actions** - CI/CD pipeline for automated test execution
 
 ## CI/CD
+[![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
 
 This project uses **GitHub Actions** to automatically run all Cypress tests on every Pull Request targeting `main`.
 
@@ -28,15 +29,6 @@ The workflow:
 - Uploads videos after every run
 
 Workflow file: `.github/workflows/cypress-ci.yml`
-
-### Required GitHub Secrets
-
-| Secret | Description |
-|---|---|
-| `USER_PASSWORD` | Password for regular user |
-| `ADMIN_PASSWORD` | Password for admin user |
-| `LOGIN_VALID_EMAIL` | Valid login email |
-| `LOGIN_VALID_PASSWORD` | Valid login password |
 
 ## Project Structure
 
@@ -72,8 +64,8 @@ e2e-cypress-test/
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd e2e-cypress-test
+git clone https://github.com/camilagomo/e2e-challenge-test.git
+cd e2e-challenge-test
 ```
 
 2. Install dependencies:
