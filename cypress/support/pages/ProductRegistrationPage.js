@@ -2,7 +2,6 @@
 // ***********************************************************
 
 class ProductRegistrationPage {
-  // Page Elements
   elements = {
     nameInput: () => cy.get('[data-testid="nome"]'),
     priceInput: () => cy.get('[data-testid="preco"]'),
@@ -11,21 +10,24 @@ class ProductRegistrationPage {
     submitButton: () => cy.get('[data-testid="cadastarProdutos"]'),
   };
 
-  // Act
+  visit() {
+    cy.visit('/cadastrarprodutos');
+  }
+
   fillName(name) {
-    this.elements.nameInput().type(name);
+    this.elements.nameInput().clear().type(name);
   }
 
   fillPrice(price) {
-    this.elements.priceInput().type(price);
+    this.elements.priceInput().clear().type(price);
   }
 
   fillDescription(description) {
-    this.elements.descriptionInput().type(description);
+    this.elements.descriptionInput().clear().type(description);
   }
 
   fillQuantity(quantity) {
-    this.elements.quantityInput().type(quantity);
+    this.elements.quantityInput().clear().type(quantity);
   }
 
   fillForm({ nome, preco, descricao, quantidade }) {
@@ -39,12 +41,15 @@ class ProductRegistrationPage {
     this.elements.submitButton().click();
   }
 
-  // Assert
   shouldHaveValues({ nome, preco, descricao, quantidade }) {
     this.elements.nameInput().should('have.value', nome);
     this.elements.priceInput().should('have.value', String(preco));
     this.elements.descriptionInput().should('have.value', descricao);
     this.elements.quantityInput().should('have.value', String(quantidade));
+  }
+
+  shouldRedirectAfterSuccess() {
+    cy.url().should('include', '/admin/listarprodutos');
   }
 }
 

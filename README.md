@@ -20,6 +20,8 @@ This project implements end-to-end (E2E) automated tests for:
 ## CI/CD
 [![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
 
+[![Cypress Tests](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
+
 This project uses **GitHub Actions** to automatically run all Cypress tests on every Pull Request targeting `main`.
 
 The workflow:
