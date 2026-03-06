@@ -12,46 +12,46 @@ describe('API - Products', () => {
   before(() => {
     cy.fixture('products').then((products) => {
       productData = products;
-    });
 
-    cy.fixture('users').then((users) => {
-      // Login as admin to get auth token
-      cy.request({
-        method: 'POST',
-        url: `${apiUrl}/login`,
-        body: {
-          email: users.loginCredentials.valid.email,
-          password: credentials.loginValidPassword(),
-        },
-        failOnStatusCode: false,
-      }).then((response) => {
-        adminToken = response.body.authorization;
-      });
-
-      // Create and login as non-admin user
-      const uniqueEmail = `nonadmin${Date.now()}@qa.com.br`;
-      const nonAdminUser = {
-        ...users.nonAdminUser,
-        email: uniqueEmail,
-        password: credentials.userPassword(),
-      };
-
-      cy.request({
-        method: 'POST',
-        url: `${apiUrl}/usuarios`,
-        body: nonAdminUser,
-        failOnStatusCode: false,
-      }).then(() => {
+      cy.fixture('users').then((users) => {
+        // Login as admin to get auth token
         cy.request({
           method: 'POST',
           url: `${apiUrl}/login`,
           body: {
-            email: uniqueEmail,
-            password: credentials.userPassword(),
+            email: users.loginCredentials.valid.email,
+            password: credentials.loginValidPassword(),
           },
           failOnStatusCode: false,
-        }).then((loginResponse) => {
-          nonAdminToken = loginResponse.body.authorization;
+        }).then((response) => {
+          adminToken = response.body.authorization;
+
+          // Create and login as non-admin user (sequentially after admin token)
+          const uniqueEmail = `nonadmin${Date.now()}@qa.com.br`;
+          const nonAdminUser = {
+            ...users.nonAdminUser,
+            email: uniqueEmail,
+            password: credentials.userPassword(),
+          };
+
+          cy.request({
+            method: 'POST',
+            url: `${apiUrl}/usuarios`,
+            body: nonAdminUser,
+            failOnStatusCode: false,
+          }).then(() => {
+            cy.request({
+              method: 'POST',
+              url: `${apiUrl}/login`,
+              body: {
+                email: uniqueEmail,
+                password: credentials.userPassword(),
+              },
+              failOnStatusCode: false,
+            }).then((loginResponse) => {
+              nonAdminToken = loginResponse.body.authorization;
+            });
+          });
         });
       });
     });
