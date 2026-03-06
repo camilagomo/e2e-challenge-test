@@ -1,5 +1,7 @@
 # E2E Testing Project - ServeRest
 
+[![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
+
 E2E test automation project using Cypress for the frontend and API of the ServeRest application.
 
 ## About the Project
