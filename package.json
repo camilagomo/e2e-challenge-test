@@ -11,7 +11,8 @@
     "test:all": "cypress run",
     "test:chrome": "cypress run --browser chrome",
     "test:firefox": "cypress run --browser firefox",
-    "test:headed": "cypress run --headed"
+    "test:headed": "cypress run --headed",
+    "test:report": "cypress run --reporter cypress-mochawesome-reporter"
   },
   "keywords": [
     "cypress",
@@ -25,6 +26,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^10.3.0",
-    "cypress": "^15.11.0"
+    "cypress": "^15.11.0",
+    "cypress-mochawesome-reporter": "^3.8.4"
   }
 }
