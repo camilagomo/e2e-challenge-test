@@ -4,7 +4,7 @@
 import credentials from '../../support/utils/credentials';
 
 describe('API - Login', () => {
-  const apiUrl = 'https://serverest.dev';
+  const apiUrl = Cypress.env('apiUrl');
   let loginCredentials;
 
   before(() => {

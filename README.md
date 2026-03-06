@@ -12,7 +12,6 @@ This project implements end-to-end (E2E) automated tests for:
 
 - **Cypress** - E2E testing framework
 - **JavaScript** - Programming language
-- **Faker.js** - Library for generating fake data
 - **Node.js** - JavaScript runtime environment
 - **GitHub Actions** - CI/CD pipeline for automated test execution
 
@@ -22,7 +21,7 @@ This project uses **GitHub Actions** to automatically run all Cypress tests on e
 
 The workflow:
 - Runs on `ubuntu-latest` using Chrome browser
-- Injects credentials via GitHub Secrets (never exposed in code)
+- Injects credentials via GitHub Secrets
 - Uploads screenshots on test failure
 - Uploads videos after every run
 
@@ -44,14 +43,10 @@ e2e-cypress-test/
 ├── cypress/
 │   ├── e2e/
 │   │   ├── api/              # API Tests
-│   │   │   ├── login.cy.js
-│   │   │   ├── users.cy.js
 │   │   └── ui/               # UI Tests
-│   │       ├── login.cy.js
 │   ├── fixtures/             # Data Tests (JSON)
 │   │   ├── users.json
 │   │   ├── products.json
-│   │   └── messages.json
 │   ├── support/
 │   │   ├── commands/         # Custom Commands
 │   │   ├── pages/            # Page Objects
@@ -182,45 +177,6 @@ describe('API - Resource', () => {
     });
   });
 });
-```
-
-## Available Custom Commands
-
-### UI Commands
-- `cy.login(email, password)` - Login to application
-- `cy.logout()` - Logout
-- `cy.fillRegistrationForm(userData)` - Fill registration form
-- `cy.waitForLoading()` - Wait for loading to disappear
-
-### API Commands
-- `cy.apiLogin(email, password)` - Login via API
-- `cy.apiCreateUser(userData)` - Create user via API
-- `cy.apiGetUsers(params)` - List users via API
-- `cy.apiDeleteUser(userId, token)` - Delete user via API
-- `cy.apiCreateProduct(productData, token)` - Create product via API
-- `cy.apiGetProducts(params)` - List products via API
-- `cy.apiDeleteProduct(productId, token)` - Delete product via API
-
-## Available Fixtures
-
-### users.json
-Contains user data for tests:
-- `validUser` - Valid admin user
-- `nonAdminUser` - Valid regular user
-- `invalidUser` - Invalid data for negative tests
-
-## Configuration
-
-Cypress configurations are in `cypress.config.js`:
-- Base URLs (frontend and API)
-- Timeouts
-- Retry settings
-- Video and screenshot settings
-
-Environment variables can be accessed via:
-```javascript
-Cypress.env('apiUrl')
-Cypress.env('frontendUrl')
 ```
 
 ## Reports

@@ -4,7 +4,7 @@
 import credentials from '../../support/utils/credentials';
 
 describe('API - Products', () => {
-  const apiUrl = 'https://serverest.dev';
+  const apiUrl = Cypress.env('apiUrl');
   let productData;
   let adminToken;
   let nonAdminToken;

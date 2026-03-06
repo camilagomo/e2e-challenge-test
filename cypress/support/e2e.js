@@ -5,7 +5,7 @@
 // ***********************************************************
 
 // Importar commands customizados
-// import './commands/ui-commands';
+import './commands/ui-commands';
 // import './commands/api-commands';
 // import './commands/common-commands';
 

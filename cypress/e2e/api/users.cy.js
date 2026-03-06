@@ -4,7 +4,7 @@
 import credentials from '../../support/utils/credentials';
 
 describe('API - Users', () => {
-  const apiUrl = 'https://serverest.dev';
+  const apiUrl = Cypress.env('apiUrl');
   let userData;
   let createUserData;
   let createdUserId;
@@ -44,16 +44,27 @@ describe('API - Users', () => {
 
   context('POST - Create User with Invalid Data', () => {
     it('Should return error 400 when email is already registered', () => {
-      // Act
+      // Arrange - Create user first to guarantee the email exists
+      const duplicateEmail = `duplicate${Date.now()}@qa.com.br`;
+      const user = { ...userData.validUser, email: duplicateEmail, password: credentials.userPassword() };
+
       cy.request({
         method: 'POST',
         url: `${apiUrl}/usuarios`,
-        body: { ...userData.validUser, password: credentials.userPassword() },
+        body: user,
         failOnStatusCode: false,
-      }).then((response) => {
-        // Assert
-        expect(response.status).to.eq(400);
-        expect(response.body).to.have.property('message', 'Este email já está sendo usado');
+      }).then(() => {
+        // Act - Try to create again with same email
+        cy.request({
+          method: 'POST',
+          url: `${apiUrl}/usuarios`,
+          body: user,
+          failOnStatusCode: false,
+        }).then((response) => {
+          // Assert
+          expect(response.status).to.eq(400);
+          expect(response.body).to.have.property('message', 'Este email já está sendo usado');
+        });
       });
     });
 
