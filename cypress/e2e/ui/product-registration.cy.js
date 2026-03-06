@@ -1,31 +1,21 @@
 // UI Test - Product Registration
 // ***********************************************************
 
-import LoginPage from '../../support/pages/LoginPage';
 import HomePage from '../../support/pages/HomePage';
+import ProductRegistrationPage from '../../support/pages/ProductRegistrationPage';
 import { faker } from '@faker-js/faker';
-import credentials from '../../support/utils/credentials';
 
 describe('UI - Product Registration', () => {
   let productData;
-  let loginData;
 
   before(() => {
     cy.fixture('products').then((products) => {
       productData = products;
     });
-    cy.fixture('users').then((users) => {
-      loginData = users.loginCredentials;
-    });
   });
 
   beforeEach(() => {
-    // Login as admin before each test
-    LoginPage.visit();
-    cy.get('[data-testid="email"]').type(loginData.valid.email);
-    cy.get('[data-testid="senha"]').type(credentials.loginValidPassword());
-    cy.get('[data-testid="entrar"]').click();
-    cy.url().should('include', '/home');
+    cy.loginAsAdmin();
   });
 
   // -------------------------------------------------------
@@ -45,21 +35,15 @@ describe('UI - Product Registration', () => {
   // Scenario 2: Fill in product form
   // -------------------------------------------------------
   context('Form - Fill Product Fields', () => {
-    it('Should fill in product name, price, description and quantity', () => {
+    it('Should fill in all product fields correctly', () => {
       // Arrange
       HomePage.clickRegisterProduct();
 
       // Act
-      cy.get('[data-testid="nome"]').type(productData.validProduct.nome);
-      cy.get('[data-testid="preco"]').type(productData.validProduct.preco);
-      cy.get('[data-testid="descricao"]').type(productData.validProduct.descricao);
-      cy.get('[data-testid="quantity"]').type(productData.validProduct.quantidade);
+      ProductRegistrationPage.fillForm(productData.validProduct);
 
       // Assert
-      cy.get('[data-testid="nome"]').should('have.value', productData.validProduct.nome);
-      cy.get('[data-testid="preco"]').should('have.value', String(productData.validProduct.preco));
-      cy.get('[data-testid="descricao"]').should('have.value', productData.validProduct.descricao);
-      cy.get('[data-testid="quantity"]').should('have.value', String(productData.validProduct.quantidade));
+      ProductRegistrationPage.shouldHaveValues(productData.validProduct);
     });
   });
 
@@ -67,20 +51,49 @@ describe('UI - Product Registration', () => {
   // Scenario 3: Register product successfully
   // -------------------------------------------------------
   context('Registration - Product Successfully', () => {
-    it('Should successfully register a new product', () => {
+    it('Should successfully register a new product and redirect to product list', () => {
       // Arrange
-      const uniqueName = `${productData.validProduct.nome} ${faker.string.alphanumeric(5)}`;
+      const uniqueProduct = {
+        ...productData.validProduct,
+        nome: `${productData.validProduct.nome} ${faker.string.alphanumeric(5)}`,
+      };
       HomePage.clickRegisterProduct();
 
       // Act
-      cy.get('[data-testid="nome"]').type(uniqueName);
-      cy.get('[data-testid="preco"]').type(productData.validProduct.preco);
-      cy.get('[data-testid="descricao"]').type(productData.validProduct.descricao);
-      cy.get('[data-testid="quantity"]').type(productData.validProduct.quantidade);
-      cy.get('[data-testid="cadastarProdutos"]').click();
+      ProductRegistrationPage.fillForm(uniqueProduct);
+      ProductRegistrationPage.submit();
 
       // Assert
       cy.url().should('include', '/admin/listarprodutos');
+    });
+  });
+
+  // -------------------------------------------------------
+  // Scenario 4: Required field validation
+  // -------------------------------------------------------
+  context('Validation - Required Fields', () => {
+    it('Should not register product when name is empty', () => {
+      // Arrange
+      HomePage.clickRegisterProduct();
+
+      // Act
+      ProductRegistrationPage.fillForm(productData.createProductData.withoutName);
+      ProductRegistrationPage.submit();
+
+      // Assert
+      cy.url().should('include', '/cadastrarprodutos');
+    });
+
+    it('Should not register product when price is empty', () => {
+      // Arrange
+      HomePage.clickRegisterProduct();
+
+      // Act
+      ProductRegistrationPage.fillForm(productData.createProductData.withoutPrice);
+      ProductRegistrationPage.submit();
+
+      // Assert
+      cy.url().should('include', '/cadastrarprodutos');
     });
   });
 });

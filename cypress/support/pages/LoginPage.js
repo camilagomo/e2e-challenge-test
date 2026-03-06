@@ -1,9 +1,8 @@
-// ***********************************************************
 // Login Page Object - Página de Login
 // ***********************************************************
 
 class LoginPage {
-  // Elementos da página
+  // Page elements
   elements = {
     emailInput: () => cy.get('[data-testid="email"]'),
     passwordInput: () => cy.get('[data-testid="senha"]'),
@@ -14,7 +13,7 @@ class LoginPage {
     passwordError: () => cy.get('[data-testid="password-error"]'),
   };
 
-  // Ações
+  // Act
   visit() {
     cy.visit('/login');
   }
@@ -41,7 +40,7 @@ class LoginPage {
     this.clickLoginButton();
   }
 
-  // Validações
+  // Assert
   shouldShowErrorMessage(message) {
     this.elements.errorMessage().should('be.visible').and('contain.text', message);
   }
