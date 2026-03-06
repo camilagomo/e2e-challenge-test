@@ -14,6 +14,28 @@ This project implements end-to-end (E2E) automated tests for:
 - **JavaScript** - Programming language
 - **Faker.js** - Library for generating fake data
 - **Node.js** - JavaScript runtime environment
+- **GitHub Actions** - CI/CD pipeline for automated test execution
+
+## CI/CD
+
+This project uses **GitHub Actions** to automatically run all Cypress tests on every Pull Request targeting `main`.
+
+The workflow:
+- Runs on `ubuntu-latest` using Chrome browser
+- Injects credentials via GitHub Secrets (never exposed in code)
+- Uploads screenshots on test failure
+- Uploads videos after every run
+
+Workflow file: `.github/workflows/cypress-ci.yml`
+
+### Required GitHub Secrets
+
+| Secret | Description |
+|---|---|
+| `USER_PASSWORD` | Password for regular user |
+| `ADMIN_PASSWORD` | Password for admin user |
+| `LOGIN_VALID_EMAIL` | Valid login email |
+| `LOGIN_VALID_PASSWORD` | Valid login password |
 
 ## Project Structure
 
