@@ -1,6 +1,8 @@
 // API Test Template - Login
 // ***********************************************************
 
+import credentials from '../../support/utils/credentials';
+
 describe('API - Login', () => {
   const apiUrl = 'https://serverest.dev';
   let loginCredentials;
@@ -17,7 +19,10 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.valid,
+        body: {
+          email: loginCredentials.valid.email,
+          password: credentials.loginValidPassword(),
+        },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -35,7 +40,10 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.invalid,
+        body: {
+          email: loginCredentials.invalid.email,
+          password: 'senhaerrada',
+        },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -49,7 +57,10 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.invalidEmail,
+        body: {
+          email: loginCredentials.invalidEmail.email,
+          password: credentials.loginValidPassword(),
+        },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -63,7 +74,10 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.invalidPassword,
+        body: {
+          email: loginCredentials.invalidPassword.email,
+          password: 'senhaerrada123',
+        },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -79,7 +93,7 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.missingEmail,
+        body: { password: credentials.loginValidPassword() },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -93,7 +107,7 @@ describe('API - Login', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: loginCredentials.missingPassword,
+        body: { email: loginCredentials.missingPassword.email },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert

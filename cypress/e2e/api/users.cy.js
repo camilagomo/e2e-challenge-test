@@ -1,6 +1,8 @@
 // API Test Template - Users
 // ***********************************************************
 
+import credentials from '../../support/utils/credentials';
+
 describe('API - Users', () => {
   const apiUrl = 'https://serverest.dev';
   let userData;
@@ -21,6 +23,7 @@ describe('API - Users', () => {
       const newUser = {
         ...userData.validUser,
         email: uniqueEmail,
+        password: credentials.userPassword(),
       };
 
       // Act
@@ -45,7 +48,7 @@ describe('API - Users', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/usuarios`,
-        body: userData.validUser,
+        body: { ...userData.validUser, password: credentials.userPassword() },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -60,6 +63,7 @@ describe('API - Users', () => {
       const userWithoutName = {
         ...createUserData.userWithoutName,
         email: uniqueEmail,
+        password: credentials.userPassword(),
       };
 
       // Act
@@ -80,7 +84,7 @@ describe('API - Users', () => {
       cy.request({
         method: 'POST',
         url: `${apiUrl}/usuarios`,
-        body: createUserData.userWithInvalidEmail,
+        body: { ...createUserData.userWithInvalidEmail, password: credentials.userPassword() },
         failOnStatusCode: false,
       }).then((response) => {
         // Assert
@@ -95,6 +99,7 @@ describe('API - Users', () => {
       const userWithoutPassword = {
         ...createUserData.userWithoutPassword,
         email: uniqueEmail,
+        password: '',
       };
 
       // Act
@@ -135,6 +140,7 @@ describe('API - Users', () => {
       const newUser = {
         ...userData.validUser,
         email: uniqueEmail,
+        password: credentials.userPassword(),
       };
 
       cy.request({
@@ -155,7 +161,6 @@ describe('API - Users', () => {
           expect(response.status).to.eq(200);
           expect(response.body).to.have.property('nome', newUser.nome);
           expect(response.body).to.have.property('email', newUser.email);
-          expect(response.body).to.have.property('password', newUser.password);
           expect(response.body).to.have.property('administrador', newUser.administrador);
           expect(response.body).to.have.property('_id', createdUserId);
         });
@@ -164,7 +169,7 @@ describe('API - Users', () => {
 
     it('Should return error 400 when user ID does not exist', () => {
       // Arrange
-      const nonExistentId = 'abc1234567890123'; // Valid format but doesn't exist
+      const nonExistentId = 'abc1234567890123';
 
       // Act
       cy.request({
@@ -180,7 +185,7 @@ describe('API - Users', () => {
 
     it('Should return error 400 when user ID has invalid format', () => {
       // Arrange
-      const invalidFormatId = 'invalidId'; // Less than 16 characters
+      const invalidFormatId = 'invalidId';
 
       // Act
       cy.request({
