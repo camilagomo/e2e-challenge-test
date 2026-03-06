@@ -1,7 +1,5 @@
 # E2E Testing Project - ServeRest
 
-[![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
-
 E2E test automation project using Cypress for the frontend and API of the ServeRest application.
 
 ## About the Project
@@ -18,9 +16,8 @@ This project implements end-to-end (E2E) automated tests for:
 - **GitHub Actions** - CI/CD pipeline for automated test execution
 
 ## CI/CD
-[![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
 
-[![Cypress Tests](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
+[![Cypress CI](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml/badge.svg)](https://github.com/camilagomo/e2e-challenge-test/actions/workflows/cypress-ci.yml)
 
 This project uses **GitHub Actions** to automatically run all Cypress tests on every Pull Request targeting `main`.
 
