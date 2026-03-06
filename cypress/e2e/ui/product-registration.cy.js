@@ -16,6 +16,7 @@ describe('UI - Product Registration', () => {
 
   beforeEach(() => {
     cy.loginAsAdmin();
+    HomePage.clickRegisterProduct();
   });
 
   // -------------------------------------------------------
@@ -23,10 +24,6 @@ describe('UI - Product Registration', () => {
   // -------------------------------------------------------
   context('Navigation - Product Registration', () => {
     it('Should navigate to product registration page', () => {
-      // Act
-      HomePage.clickRegisterProduct();
-
-      // Assert
       cy.url().should('include', '/cadastrarprodutos');
     });
   });
@@ -36,9 +33,6 @@ describe('UI - Product Registration', () => {
   // -------------------------------------------------------
   context('Form - Fill Product Fields', () => {
     it('Should fill in all product fields correctly', () => {
-      // Arrange
-      HomePage.clickRegisterProduct();
-
       // Act
       ProductRegistrationPage.fillForm(productData.validProduct);
 
@@ -57,14 +51,13 @@ describe('UI - Product Registration', () => {
         ...productData.validProduct,
         nome: `${productData.validProduct.nome} ${faker.string.alphanumeric(5)}`,
       };
-      HomePage.clickRegisterProduct();
 
       // Act
       ProductRegistrationPage.fillForm(uniqueProduct);
       ProductRegistrationPage.submit();
 
       // Assert
-      cy.url().should('include', '/admin/listarprodutos');
+      ProductRegistrationPage.shouldRedirectAfterSuccess();
     });
   });
 
@@ -73,9 +66,6 @@ describe('UI - Product Registration', () => {
   // -------------------------------------------------------
   context('Validation - Required Fields', () => {
     it('Should not register product when name is empty', () => {
-      // Arrange
-      HomePage.clickRegisterProduct();
-
       // Act
       ProductRegistrationPage.fillForm(productData.createProductData.withoutName);
       ProductRegistrationPage.submit();
@@ -85,9 +75,6 @@ describe('UI - Product Registration', () => {
     });
 
     it('Should not register product when price is empty', () => {
-      // Arrange
-      HomePage.clickRegisterProduct();
-
       // Act
       ProductRegistrationPage.fillForm(productData.createProductData.withoutPrice);
       ProductRegistrationPage.submit();
