@@ -3,6 +3,7 @@
 
 import LoginPage from '../../support/pages/LoginPage';
 import { faker } from '@faker-js/faker';
+import credentials from '../../support/utils/credentials';
 
 describe('UI - User Registration', () => {
   let cadastroUser;
@@ -36,12 +37,12 @@ describe('UI - User Registration', () => {
       // Act
       cy.get('[data-testid="nome"]').type(cadastroUser.regularUser.nome);
       cy.get('[data-testid="email"]').type(cadastroUser.regularUser.email);
-      cy.get('[data-testid="password"]').type(cadastroUser.regularUser.password);
+      cy.get('[data-testid="password"]').type(credentials.userPassword());
 
       // Assert
       cy.get('[data-testid="nome"]').should('have.value', cadastroUser.regularUser.nome);
       cy.get('[data-testid="email"]').should('have.value', cadastroUser.regularUser.email);
-      cy.get('[data-testid="password"]').should('have.value', cadastroUser.regularUser.password);
+      cy.get('[data-testid="password"]').should('have.value', credentials.userPassword());
     });
 
     it('Should successfully register a regular user', () => {
@@ -52,7 +53,7 @@ describe('UI - User Registration', () => {
       // Act
       cy.get('[data-testid="nome"]').type(cadastroUser.regularUser.nome);
       cy.get('[data-testid="email"]').type(uniqueEmail);
-      cy.get('[data-testid="password"]').type(cadastroUser.regularUser.password);
+      cy.get('[data-testid="password"]').type(credentials.userPassword());
       cy.get('[data-testid="cadastrar"]').click();
 
       // Assert
@@ -79,13 +80,13 @@ describe('UI - User Registration', () => {
       // Act
       cy.get('[data-testid="nome"]').type(cadastroUser.adminUser.nome);
       cy.get('[data-testid="email"]').type(cadastroUser.adminUser.email);
-      cy.get('[data-testid="password"]').type(cadastroUser.adminUser.password);
+      cy.get('[data-testid="password"]').type(credentials.adminPassword());
       cy.get('[data-testid="checkbox"]').check();
 
       // Assert
       cy.get('[data-testid="nome"]').should('have.value', cadastroUser.adminUser.nome);
       cy.get('[data-testid="email"]').should('have.value', cadastroUser.adminUser.email);
-      cy.get('[data-testid="password"]').should('have.value', cadastroUser.adminUser.password);
+      cy.get('[data-testid="password"]').should('have.value', credentials.adminPassword());
       cy.get('[data-testid="checkbox"]').should('be.checked');
     });
 
@@ -97,7 +98,7 @@ describe('UI - User Registration', () => {
       // Act
       cy.get('[data-testid="nome"]').type(cadastroUser.adminUser.nome);
       cy.get('[data-testid="email"]').type(uniqueEmail);
-      cy.get('[data-testid="password"]').type(cadastroUser.adminUser.password);
+      cy.get('[data-testid="password"]').type(credentials.adminPassword());
       cy.get('[data-testid="checkbox"]').check();
       cy.get('[data-testid="cadastrar"]').click();
 
