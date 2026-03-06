@@ -1,12 +1,13 @@
 // API Test Template - Products
 // ***********************************************************
 
+import credentials from '../../support/utils/credentials';
+
 describe('API - Products', () => {
   const apiUrl = 'https://serverest.dev';
   let productData;
   let adminToken;
   let nonAdminToken;
-  let userData;
 
   before(() => {
     cy.fixture('products').then((products) => {
@@ -14,13 +15,14 @@ describe('API - Products', () => {
     });
 
     cy.fixture('users').then((users) => {
-      userData = users;
-
       // Login as admin to get auth token
       cy.request({
         method: 'POST',
         url: `${apiUrl}/login`,
-        body: users.loginCredentials.valid,
+        body: {
+          email: users.loginCredentials.valid.email,
+          password: credentials.loginValidPassword(),
+        },
         failOnStatusCode: false,
       }).then((response) => {
         adminToken = response.body.authorization;
@@ -31,6 +33,7 @@ describe('API - Products', () => {
       const nonAdminUser = {
         ...users.nonAdminUser,
         email: uniqueEmail,
+        password: credentials.userPassword(),
       };
 
       cy.request({
@@ -44,7 +47,7 @@ describe('API - Products', () => {
           url: `${apiUrl}/login`,
           body: {
             email: uniqueEmail,
-            password: nonAdminUser.password,
+            password: credentials.userPassword(),
           },
           failOnStatusCode: false,
         }).then((loginResponse) => {
