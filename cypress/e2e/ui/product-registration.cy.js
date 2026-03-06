@@ -53,13 +53,13 @@ describe('UI - Product Registration', () => {
       cy.get('[data-testid="nome"]').type(productData.validProduct.nome);
       cy.get('[data-testid="preco"]').type(productData.validProduct.preco);
       cy.get('[data-testid="descricao"]').type(productData.validProduct.descricao);
-      cy.get('[data-testid="quantidade"]').type(productData.validProduct.quantidade);
+      cy.get('[data-testid="quantity"]').type(productData.validProduct.quantidade);
 
       // Assert
       cy.get('[data-testid="nome"]').should('have.value', productData.validProduct.nome);
       cy.get('[data-testid="preco"]').should('have.value', String(productData.validProduct.preco));
       cy.get('[data-testid="descricao"]').should('have.value', productData.validProduct.descricao);
-      cy.get('[data-testid="quantidade"]').should('have.value', String(productData.validProduct.quantidade));
+      cy.get('[data-testid="quantity"]').should('have.value', String(productData.validProduct.quantidade));
     });
   });
 
@@ -76,8 +76,8 @@ describe('UI - Product Registration', () => {
       cy.get('[data-testid="nome"]').type(uniqueName);
       cy.get('[data-testid="preco"]').type(productData.validProduct.preco);
       cy.get('[data-testid="descricao"]').type(productData.validProduct.descricao);
-      cy.get('[data-testid="quantidade"]').type(productData.validProduct.quantidade);
-      cy.get('[data-testid="cadastrar"]').click();
+      cy.get('[data-testid="quantity"]').type(productData.validProduct.quantidade);
+      cy.get('[data-testid="cadastarProdutos"]').click();
 
       // Assert
       cy.url().should('include', '/admin/listarprodutos');
