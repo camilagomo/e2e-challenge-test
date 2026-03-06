@@ -1,6 +1,16 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    reportDir: 'cypress/reports',
+    overwrite: false,
+    html: true,
+    json: true,
+    timestamp: 'mmddyyyy_HHMMss',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+  },
   e2e: {
     // URLs base para os testes
     baseUrl: 'https://front.serverest.dev',
@@ -49,7 +59,7 @@ module.exports = defineConfig({
     },
 
     setupNodeEvents(on, config) {
-      // Implementar event listeners aqui se necessário
+      require('cypress-mochawesome-reporter/plugin')(on);
       return config;
     },
   },

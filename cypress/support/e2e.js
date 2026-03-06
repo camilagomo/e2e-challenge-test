@@ -4,6 +4,8 @@
 // comportamento global e configuração que modifica o Cypress.
 // ***********************************************************
 
+import 'cypress-mochawesome-reporter/register';
+
 // Importar commands customizados
 import './commands/ui-commands';
 // import './commands/api-commands';
